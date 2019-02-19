@@ -7,15 +7,27 @@
 let time = 0;
 let wave = [];
 
-let slider;
+let slider, timeSlider;
 
 function setup() {
   createCanvas(600, 400);
-  slider = createSlider(1, 10, 5);
+
+  slider = createSlider(1, 50, 5);
+  slider.position (10, 20);
+  
+  timeSlider = createSlider(1, 100, 20);
+  timeSlider.position (10, 60);
+
+
 }
 
 function draw() {
   background(0);
+
+  fill(255, 100);
+  text('granularity: '+slider.value() , slider.x * 2 + slider.width, slider.y);
+  text('time: '+timeSlider.value(), timeSlider.x * 2 + timeSlider.width, timeSlider.y);
+
   translate(150, 200);
 
   let x = 0;
@@ -51,7 +63,7 @@ function draw() {
   }
   endShape();
 
-  time += 0.05;
+  time += ( timeSlider.value()/1000 );
 
   if (wave.length > 250) {
     wave.pop();
